@@ -1,0 +1,3 @@
+[submodule "textgrid_remote"]
+	path = textgrid_remote
+	url = https://github.com/kylebgorman/textgrid.git
