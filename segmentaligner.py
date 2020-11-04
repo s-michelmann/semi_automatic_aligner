@@ -7,7 +7,7 @@ Created on Fri Jul 24 19:59:40 2020
 import os 
 import wave 
 import warnings
-from textgrid import textgrid
+from textgrid_remote.textgrid import textgrid
 from subprocess import Popen, PIPE
 
 class SegmentAligner:
