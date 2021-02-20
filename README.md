@@ -92,7 +92,7 @@ Now finally continue with the install
 Now you can cd back into your desgnated directory that should have a folder named p2fa_py3 and a folder named htk in it.  
 
 - [x] Now clone this repository including the submodule for textgrid!  
-  `git clone -recurse-submodules -j8 https://github.com/s-michelmann/semi_automatic_aligner`  
+  `git clone --recurse-submodules -j8 https://github.com/s-michelmann/semi_automatic_aligner`  
 
 
 - [x] Install all the requirements  
@@ -106,6 +106,7 @@ Now you can cd back into your desgnated directory that should have a folder name
 
 ## Use  
 You need to
+- `conda activate alignment` 
 - open a .wav file and a .txt file that contains the transcription of the audio. You should then see the audio and the text displayed.
 - Left-click onto the audio-trace and hit the green play button to play.
 - Right-click onto the audio-trace to select a segment (a blue patch will mark the segment)
