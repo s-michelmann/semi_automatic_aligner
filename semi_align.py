@@ -4,10 +4,10 @@ Created on Fri Jul 24 21:26:31 2020
 
 @author: Sebastian Michelmann
 """
-#%% todo:-add zoom button, -add menu with save option and aligner selection
+#%% todo:-add zoom button, -add menu with save  aligner selection
 # note:
 # make color green for fixed text
-# play button needs to redraw the canvas
+
     
     
 # Make button read text from list and change label from update to update listbox
@@ -25,7 +25,9 @@ Created on Fri Jul 24 21:26:31 2020
 
 # open the aligner with the corresponding files
 
-import time
+open_with_files = False;
+
+#import time
 
 from segmentaligner import SegmentAligner
 import pyaudio
@@ -43,6 +45,8 @@ from matplotlib.patches import Rectangle
 #from matplotlib.transforms import Bbox
 import threading
 import random
+import matplotlib
+matplotlib.use('TkAgg')
 #%% NOTE: audio needs to be async!
 constructed = False
 time_axis = None
@@ -59,9 +63,11 @@ selection_A = 0
 last_list_sel = None
 root = tk.Tk()
 bg = None
-start_time = time.time()
-root.geometry('1000x550+50+50') 
+#start_time = time.time()
+root.geometry('1000x550+50+50')
 root.title("SeMi-automatic aligner")
+
+
 
 # #Icons made by <a href="https://www.flaticon.com/authors/skyclick" title="Skyclick">Skyclick</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
 #root.iconbitmap(r'semi_files//img//brain.ico')
@@ -135,7 +141,7 @@ def loadfile():
             if word[3]== 'NaN':
                 words_read.append((word[0], word[1], None, None))
             else:
-                print(word)
+                #print(word)
                 words_read.append(
                     (word[0], word[1], float(word[2]), float(word[3])))
     if constructed:
@@ -225,15 +231,17 @@ def add_elements():
     
     
     ax1 = fig.gca()
-    ax1.plot(time_axis[0:-1:100], data_all[0:-1:100],'-', color = 'dimgray', lw = 0.5)
+    ax1.plot(time_axis[0:-1:200], data_all[0:-1:200],'-', color = 'dimgray', lw = 0.5)
     ax1.get_yaxis().set_ticks([])
     ax1.set_xlim([0,x_scale]) # this works in audio, if pos> half of time a
     
    # ax1.text(1, 0,"test",  fontsize = 6, bbox=dict(pad = 0, facecolor='red', lw = 0 ), animated=False)
   
 
-    #fig.set_tight_layout(True)
-    fig.tight_layout(pad = 0.1)
+   # fig.set_tight_layout(True)
+   # fig.tight_layout()
+    
+    fig.tight_layout(pad=0.01, w_pad=0.01, h_pad=0.01)
     fig.add_subplot(212).plot(time_axis, np.empty((len(time_axis),1))
                                , color = 'dimgray', lw = 0.2)
    
@@ -245,7 +253,7 @@ def add_elements():
     canvas = FigureCanvasTkAgg(fig, master = root)
     
     canvas.draw()
-    canvas.flush_events()
+   # canvas.flush_events()
     # lines = ax1.get_lines()
     # for line in lines:
     #     line.set_animated(True)
@@ -282,8 +290,8 @@ def add_elements():
                     channels = sa.audio.getnchannels(),
                     rate = sa.audio.getframerate(),
                     output = True, stream_callback = callback, start = False)
-    
-    
+
+
     
     canvas.mpl_connect('button_press_event', onclick)
     
@@ -501,7 +509,7 @@ def draw_words():
           
     canvas.draw() 
     
-    canvas.flush_events()      
+    #canvas.flush_events()      
 def fill_listbox():
     global listbox
     if listbox:
@@ -676,7 +684,7 @@ def onclick(event):
                 line[2].remove()
                 line = ax1.get_lines()
     canvas.draw()
-    canvas.flush_events
+    #canvas.flush_events
     bg = canvas.copy_from_bbox(ax1.bbox)
 def pause_audio():
     if not constructed:
@@ -689,6 +697,7 @@ def pause_audio():
     playing = False
     segment_playing = False
     stream.stop_stream()    
+    canvas.flush_events()
 def play_audio():
     global playing
     global my_thread
@@ -701,23 +710,29 @@ def play_audio():
     if segment_playing:
         pause_audio()
         
-    at = sa.audio.tell()
-    x = time_axis[at]
-    lim_old = ax1.get_xlim()
-    lim_new = (x-x_scale/2, x+x_scale/2)
-    if lim_new[0] < time_axis[0]:
-        lim_new = (time_axis[0], x_scale)
-    if lim_new[1] > time_axis[-1]:
-        lim_new = (time_axis[-1]-x_scale,time_axis[-1])
+    # at = sa.audio.tell()
+    # x = time_axis[at]
+    # lim_old = ax1.get_xlim()
+    # lim_new = (x-x_scale/2, x+x_scale/2)
+    # if lim_new[0] < time_axis[0]:
+    #     lim_new = (time_axis[0], x_scale)
+    # if lim_new[1] > time_axis[-1]:
+    #     lim_new = (time_axis[-1]-x_scale,time_axis[-1])
    
-    if not(lim_old == lim_new):
-        ax1.set_xlim(lim_new)
-        ax2.set_xlim(lim_new)
-    draw_words()
-    bg = canvas.copy_from_bbox(ax1.bbox)
+    # if not(lim_old == lim_new):
+    #     ax1.set_xlim(lim_new)
+    #     ax2.set_xlim(lim_new)
+ # TODO FIX  draw_words()
+    if len(sa.aligned_words)>0:
+        draw_words()
+    else:
+        canvas.draw() 
+        #canvas.flush_events()    
+    
+  #  bg = canvas.copy_from_bbox(ax1.bbox)
     
     playing = True
-    
+   
     my_thread = threading.Thread(target=start_audio_stream)
     my_thread.start() 
     
@@ -753,8 +768,9 @@ def play_segment():
    # print('playing audio')     
     
 def refresh():
+    #print('refresh')
     global segment_playing, bg #, words_in_view
-    global start_time
+   # global start_time
     
     canvas.restore_region(bg)
     
@@ -848,20 +864,23 @@ def refresh():
     #canvas.draw()
     
     canvas.blit()
-    canvas.flush_events()
+    
+    # flush_events kills everything on MAC... wtf?
+   # canvas.flush_events()
    
     #bg = canvas.copy_from_bbox(ax1.bbox)
     
    # print("FPS: ", 1.0 / ((time.time() - start_time)+0.0000001)) # FPS = 1 / time to process loop
-    start_time = time.time()
+  # start_time = time.time()
 #    canvas2.draw()
     if segment_playing and x >= selection_B:
         pause_audio()
 
 def refresh_root():
+    #print('refresh_root')
     if playing:
         refresh()
-    root.after(16, refresh_root)
+    root.after(17, refresh_root)
 def right_step():
     if not constructed:
         return
@@ -931,6 +950,7 @@ def stop_audio():
     ax2.set_xlim((0, x_scale))
     canvas.draw()
     canvas.flush_events()
+   # canvas.flush_events()
   #  canvas2.draw()
     
 # note insertions need to be sanity checked for empty characters points etc
@@ -1043,6 +1063,12 @@ root.bind("<Return>", play_pause)
 # textname = 'semi_files//data//grav1.txt'
 # add_elements()
 # refresh_root()
+
+
+if open_with_files:
+    audioname = 'semi_files//data//grav1.wav'
+    textname = 'semi_files//data//grav1.txt'
+    add_elements()
+    refresh_root()
+
 root.mainloop()
-
-
