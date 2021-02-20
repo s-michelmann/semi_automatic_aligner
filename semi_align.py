@@ -70,7 +70,11 @@ root.title("SeMi-automatic aligner")
 
 
 # #Icons made by <a href="https://www.flaticon.com/authors/skyclick" title="Skyclick">Skyclick</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
-#root.iconbitmap(r'semi_files//img//brain.ico')
+
+#root.iconbitmap('semi_files//img//brain.ico')
+
+root.tk.call('wm', 'iconphoto', root._w, tk.PhotoImage(file= 'semi_files//img//brain.png'))
+
 root.configure(background= 'white')
 
 textname = None

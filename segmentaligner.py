@@ -120,7 +120,7 @@ class SegmentAligner:
        # handle.wait()
 
 
-       align.align(self.temp_path + '/tmp.wav', self.temp_path + '/tmp.txt', self.temp_path + '/tmp.TextGrid')
+       align.align(self.temp_path + '//tmp.wav', self.temp_path + '//tmp.txt', self.temp_path + '//tmp.TextGrid')
 
        grid = textgrid.TextGrid()
        grid.read(self.temp_path + '//tmp.Textgrid')
