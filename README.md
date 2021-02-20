@@ -3,27 +3,24 @@ This is a GUI that facilitates text-to-speech alignment. The idea is to manually
 This version is for **MacOS**, tested under MacOS Big Sur (to use with windows you need workarounds for the penn aligner, e.g. using cygwin and python 2). You can also integrate different aligners by changing the aligner function (this is not ready). Also: this is my own private (and messy) tool, so use with caution.
 
 
-## Installation
+## Installation  
 
-### prerequisite
-- [x] install anaconda or miniconda
-- [x] install XCode
+#### Prerequisites  
+- [x] install anaconda or miniconda  
+- [x] install XCode  
       `xcode-select --install`
 
-## getting the aligner to work
-(here: using penn phonetics forced aligner. I have been using https://github.com/jaekookang/p2fa_py3
-### Install the htk toolkit
-from http://htk.eng.cam.ac.uk/
+### Getting the aligner to work  
+(here: using penn phonetics forced aligner)  
+I have been using https://github.com/jaekookang/p2fa_py3 that works with python3. (the GUI-code can/could be adapted to work with other aligners and system specific setups)  
 
-Download the unix/linux version and put it in your Documents folder
-Open a terminal and type
+- [x] Install the htk toolkit  
+Download htk from http://htk.eng.cam.ac.uk/  
 
-$	tar -xvf HTK-3.4.1.tar.gz
+Download the unix/linux version and put it in your designated folder (e.g. Documents/alignment)  
 
-$	cd htk
-
-Then type
-  $	export CPPFLAGS=-UPHNALG
+In the terminal type `tar -xvf HTK-3.4.1.tar.gz` to unzip the folder. Change directory to the htk folder `cd htk`  
+and type  `export CPPFLAGS=-UPHNALG`
   $ ./configure --disable-hlmtools --disable-hslab
   $	make clean    
   $	sudo make -j4 install
