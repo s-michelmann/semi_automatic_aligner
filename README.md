@@ -1,6 +1,6 @@
 # semi_automatic_aligner
 This is a GUI that facilitates text-to-speech alignment. The idea is to manually select segments from the audio and align them with parts of the transcript. This helps when long silences or noise are messing up the forced alignment. You can also correct the transcript while you are aligning.
-This version is for **MacOS**, tested under MacOS Big Sur (to use with windows you need workarounds for the penn aligner, e.g. using cygwin and python 2). You can also integrate different aligners by changing the aligner function (this is not ready). Also: this is my own private (and messy) tool, so use with caution.
+This version is for **MacOS**, tested under MacOS Big Sur (to use with windows you need workarounds for the penn aligner, e.g. using cygwin and python 2). You can also integrate different aligners by changing the aligner function (this is not ready, you have to code this yourself). Also: this is my own private (and messy) tool, so use with caution. It only gives you word onset and offset times, **not** phoneme level alignment.
 
 
 ## Installation  
@@ -10,7 +10,7 @@ This version is for **MacOS**, tested under MacOS Big Sur (to use with windows y
 - [x] install XCode  
       `xcode-select --install`
 
-### Getting an aligner to work  
+### Getting the aligner to work  
 (here: using penn phonetics forced aligner)  
 I have been using https://github.com/jaekookang/p2fa_py3 that works with python3. The htk installation is from the instructions by jaekookang. (the GUI-code can/could be adapted to work with other aligners and system specific setups)  
 
@@ -65,41 +65,44 @@ Now finally continue with the install
   And update if necessary  
   `conda update conda`  
 
-Make a new conda environment named alignment that uses python3  
- `conda create -n alignment python=3`  
+  Make a new conda environment named alignment that uses python3  
+   `conda create -n alignment python=3`  
 
-activate the environment  
-`conda activate alignment`  
+  activate the environment  
+  `conda activate alignment`  
 
-Install sox using conda  
-`conda install -c conda-forge sox`  
+  Install sox using conda  
+  `conda install -c conda-forge sox`  
 
 - [x] get jaekookang's p2fa for python3  
 
-change into your designated folder (e.g. Documents/alignment)  
+  change into your designated folder (e.g. Documents/alignment)  
 
-clone p2fa for python3  
-`git clone https://github.com/jaekookang/p2fa_py3.git`  
+  clone p2fa for python3  
+  `git clone https://github.com/jaekookang/p2fa_py3.git`  
 
-Now  
-`cd p2fa_py3/p2fa`  
-and type  
-`python align.py examples/ploppy.wav examples/ploppy.txt examples/everythingWorks.TextGrid`   
+  Now  
+  `cd p2fa_py3/p2fa`  
+  and type  
+  `python align.py examples/ploppy.wav examples/ploppy.txt examples/everythingWorks.TextGrid`   
 
-If everything works you should now see a file named *everythingWorks.TextGrid* in the examples folder. The file contains the aligned sentence: I am trying to say ploppy  
+  If everything works you should now see a file named *everythingWorks.TextGrid* in the examples folder. The file contains the aligned sentence: I am trying to say ploppy  
 
 ### Getting this GUI to work  
 Now you can cd back into your desgnated directory that should have a folder named p2fa_py3 and a folder named htk in it.  
 
 - [x] Now clone this repository including the submodule for textgrid!  
   `git clone -recurse-submodules -j8 https://github.com/s-michelmann/semi_automatic_aligner`  
-change into the folder `cd semi_automatic_aligner`  
+
+
 - [x] Install all the requirements  
+  change into the folder `cd semi_automatic_aligner`  
+  type  
   `conda install --file requirements.txt`  
-type  
+
 - [x] type `python semi_align.py`  
 
-this should open the GUI. Once You have opened a .wav File - open wav and a .txt file the GUI will load the whole interface (see also wiki for manual). Note that .wav files may have issues with the aligner if they are not one channel sampled at 16K.
+  this should open the GUI. Once You have opened a .wav File - open wav and a .txt file the GUI will load the whole interface (see also wiki for manual). Note that .wav files may have issues with the aligner if they are not one channel sampled at 16K.
 
 ## Use  
 You need to
@@ -107,3 +110,12 @@ You need to
 - Left-click onto the audio-trace and hit the green play button to play.
 - Right-click onto the audio-trace to select a segment (a blue patch will mark the segment)
 - Click the blue play button to play the segment (note that the segment stops automatically with inaccuracies in the range of the refresh rate)
+- When playing the axes will update automatically. To skip through the audio use the left and right button. The double left lets you skip fast.
+- The listbox on the right contains all the words from the transcript. Select the words by clicking and holding, or click, press shift then click somewhere else
+- Click align to align the selection to the audio segment
+- To update the listbox with the words, edit the transcript in the textbox below the audio. Click update to update the listbox
+- If you want to find an item from the listbox in the transcript (textbox), select the item and click update. This will highlight the text in green up to the current position.
+- Save and load your progress to a .csv.
+
+## Notes
+- Too much text can get laggy. Consider splitting your transcript in parts and align them separately. Then concatenate your .csv files.
