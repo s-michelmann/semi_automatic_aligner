@@ -1,12 +1,14 @@
 # semi_automatic_aligner
-This is a little GUI that facilitates text-to-speech alignment. The idea is to manually select segments from the audio and align them with parts of the transcript. This helps when long silences or noise are messing up the forced alignment. You can also correct the transcript while you are aligning.
+This is a GUI that facilitates text-to-speech alignment. The idea is to manually select segments from the audio and align them with parts of the transcript. This helps when long silences or noise are messing up the forced alignment. You can also correct the transcript while you are aligning.
 This version is for **MacOS**, tested under MacOS Big Sur (to use with windows you need workarounds for the penn aligner, e.g. using cygwin and python 2). You can also integrate different aligners by changing the aligner function (this is not ready). Also: this is my own private (and messy) tool, so use with caution.
 
 
-Installation
+## Installation
 
-install anaconda or miniconda
-install XCode
+### prerequisite
+- [x] install anaconda or miniconda
+- [x] install XCode
+      `xcode-select --install`
 
 ## getting the aligner to work
 (here: using penn phonetics forced aligner. I have been using https://github.com/jaekookang/p2fa_py3
