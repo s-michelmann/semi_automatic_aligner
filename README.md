@@ -1,6 +1,6 @@
 # semi_automatic_aligner
-This is a GUI that facilitates text-to-speech alignment. The idea is to manually select segments from the audio and align them with parts of the transcript. This helps when long silences or noise are messing up the forced alignment. You can also correct the transcript while you are aligning.
-This version is for **MacOS**, tested under MacOS Big Sur (to use with windows you need workarounds for the penn aligner, e.g. using cygwin and python 2). You can also integrate different aligners by changing the aligner function (this is not ready, you have to code this yourself). Also: this is my own private (and messy) tool, so use with caution. It only gives you word onset and offset times, **not** phoneme level alignment.
+This is a little GUI that facilitates text-to-speech alignment. The idea is to manually select segments from the audio and align them with parts of the transcript. This helps when long silences or noise are messing up the forced alignment. You can also correct the transcript while you are aligning.
+This version is for **MacOS**, tested under MacOS Big Sur (to use with windows you need workarounds for the penn aligner, e.g. using cygwin and python 2). You can also integrate different aligners by changing the aligner function (this is not ready, you have to finish coding this yourself). Also: this is my own private (and messy) tool, so use with caution. It only gives you word onset and offset times, **not** phoneme level alignment.
 
 
 ## Installation  
@@ -110,7 +110,7 @@ You need to
 - Left-click onto the audio-trace and hit the green play button to play.
 - Right-click onto the audio-trace to select a segment (a blue patch will mark the segment)
 - Click the blue play button to play the segment (note that the segment stops automatically with inaccuracies in the range of the refresh rate)
-- When playing the axes will update automatically. To skip through the audio use the left and right button. The double left lets you skip fast.
+- When playing, the axes will update automatically. To skip through the audio use the left and right button. The double right lets you skip fast.
 - The listbox on the right contains all the words from the transcript. Select the words by clicking and holding, or click, press shift then click somewhere else
 - Click align to align the selection to the audio segment
 - To update the listbox with the words, edit the transcript in the textbox below the audio. Click update to update the listbox
