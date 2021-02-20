@@ -33,16 +33,18 @@ If the above doesn't work, do
   - `ln -s /opt/X11/include/X11 /usr/local/include/X11`
 
   - Then open the file *HTKLib/strarr.c* and in line 21
- replace | with
------------- | -------------
-Cinclude <malloc.h> | include <malloc/malloc.h>
-  - Then open *HTKLib/HRec.c* go to line 1650 and
-  replace | with
-  ------------ | -------------
-  (labid != splabid)| labpr != splabid
 
- Replace line 1650 (labid != splabid) of HTKLib/HRec.c as below
-   labpr != splabid
+
+  | replace 	| with 	|
+  |-	|-	|
+  | include <malloc.h 	| include <malloc/malloc.h 	|
+
+  - Then open *HTKLib/HRec.c* go to line 1650 and
+
+  | replace 	| with 	|
+  |-	|-	|
+  | (labid != splabid) 	| labpr != splabid 	|
+  
 
 This step will prevent "ERROR [+8522] LatFromPaths: Align have dur<=0"
  See: https://speechtechie.wordpress.com/2009/06/12/using-htk-3-4-1-on-mac-os-10-5/
@@ -94,4 +96,4 @@ change into the folder `cd semi_automatic_aligner`
 type
 - [x] type `python semi_align.py`
 
-this should open the GUI. Once You have opened a .wav File - open wav and a .txt file the GUI will load the whole interface (see wiki for manual). Note that .wav files may have issues with the aligner if they are not one channel sampled at 16K. 
+this should open the GUI. Once You have opened a .wav File - open wav and a .txt file the GUI will load the whole interface (see wiki for manual). Note that .wav files may have issues with the aligner if they are not one channel sampled at 16K.
