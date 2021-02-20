@@ -77,8 +77,9 @@ If everything works well you should now see a file named everythingWorks.TextGri
 Now you can cd back into the parent directory of p2fa_py3
 $ cd ../..
 
-Now clone this repository
-$ git clone https://github.com/s-michelmann/semi_automatic_aligner
+Now clone this repository including the submodule for textgrid!
+
+$ git clone -recurse-submodules -j8 https://github.com/s-michelmann/semi_automatic_aligner
 
 Install all the requirements
 conda install --file requirements.txt
