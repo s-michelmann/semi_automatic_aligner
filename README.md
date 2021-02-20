@@ -107,6 +107,7 @@ Now you can cd back into your desgnated directory that should have a folder name
 ## Use  
 You need to
 - `conda activate alignment` 
+- run the GUI (type `python semi_align.py`)
 - open a .wav file and a .txt file that contains the transcription of the audio. You should then see the audio and the text displayed.
 - Left-click onto the audio-trace to make the left selection (hit the green play button to play).
 - (Pause and) right-click onto the audio-trace to make a right selection and thereby select a segment (a blue patch will mark the segment)
