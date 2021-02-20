@@ -44,16 +44,18 @@ If the above doesn't work, do
   | replace 	| with 	|
   |-	|-	|
   | (labid != splabid) 	| labpr != splabid 	|
-  
+
 
 This step will prevent "ERROR [+8522] LatFromPaths: Align have dur<=0"
  See: https://speechtechie.wordpress.com/2009/06/12/using-htk-3-4-1-on-mac-os-10-5/
 
 Now back to step 7:
+
 7. `./configure`
   `make -j4 all`
 
 Now finally continue with the install
+
 8. `sudo make -j4 install`
 
 - [x] Install sox
