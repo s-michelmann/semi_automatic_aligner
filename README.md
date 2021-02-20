@@ -108,12 +108,12 @@ Now you can cd back into your desgnated directory that should have a folder name
 You need to
 - `conda activate alignment` 
 - open a .wav file and a .txt file that contains the transcription of the audio. You should then see the audio and the text displayed.
-- Left-click onto the audio-trace and hit the green play button to play.
-- Right-click onto the audio-trace to select a segment (a blue patch will mark the segment)
+- Left-click onto the audio-trace to make the left selection (hit the green play button to play).
+- (Pause and) right-click onto the audio-trace to make a right selection and thereby select a segment (a blue patch will mark the segment)
 - Click the blue play button to play the segment (note that the segment stops automatically with inaccuracies in the range of the refresh rate)
 - When playing, the axes will update automatically. To skip through the audio use the left and right button. The double right lets you skip fast.
 - The listbox on the right contains all the words from the transcript. Select the words by clicking and holding, or click, press shift then click somewhere else
-- Click align to align the selection to the audio segment
+- Click align to align the listbox selection to the audio segment
 - To update the listbox with the words, edit the transcript in the textbox below the audio. Click update to update the listbox
 - If you want to find an item from the listbox in the transcript (textbox), select the item and click update. This will highlight the text in green up to the current position.
 - Save and load your progress to a .csv.
