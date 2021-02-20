@@ -76,26 +76,27 @@ Install sox using conda
 
 - [x] get jaekookang's p2fa for python3
 
-change into your designated folder (e.g. Documents/alignment)/
-clone p2fa for python3
+change into your designated folder (e.g. Documents/alignment)  
+
+clone p2fa for python3  
 `git clone https://github.com/jaekookang/p2fa_py3.git`
 
-Now
-`cd p2fa_py3/p2fa`
-and type
-`python align.py examples/ploppy.wav examples/ploppy.txt examples/everythingWorks.TextGrid`
+Now  
+`cd p2fa_py3/p2fa`  
+and type  
+`python align.py examples/ploppy.wav examples/ploppy.txt examples/everythingWorks.TextGrid`  
 
-If everything works well you should now see a file named *everythingWorks.TextGrid* in the examples folder. The file contains the aligned sentence: I am trying to say ploppy
+If everything works well you should now see a file named *everythingWorks.TextGrid* in the examples folder. The file contains the aligned sentence: I am trying to say ploppy  
 
 ### Getting this GUI to work  
-Now you can cd back into your desgnated directory that should have a folder named p2fa_py3 and a folder named htk in it.
+Now you can cd back into your desgnated directory that should have a folder named p2fa_py3 and a folder named htk in it.  
 
-- [x] Now clone this repository including the submodule for textgrid!
-  `git clone -recurse-submodules -j8 https://github.com/s-michelmann/semi_automatic_aligner`
-change into the folder `cd semi_automatic_aligner`
-- [x] Install all the requirements
-  `conda install --file requirements.txt`
-type
-- [x] type `python semi_align.py`
+- [x] Now clone this repository including the submodule for textgrid!  
+  `git clone -recurse-submodules -j8 https://github.com/s-michelmann/semi_automatic_aligner`  
+change into the folder `cd semi_automatic_aligner`  
+- [x] Install all the requirements  
+  `conda install --file requirements.txt`  
+type  
+- [x] type `python semi_align.py`  
 
 this should open the GUI. Once You have opened a .wav File - open wav and a .txt file the GUI will load the whole interface (see wiki for manual). Note that .wav files may have issues with the aligner if they are not one channel sampled at 16K.
