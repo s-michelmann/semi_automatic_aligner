@@ -51,7 +51,7 @@ This step will prevent "ERROR [+8522] LatFromPaths: Align have dur<=0"
 
 Now back to step 7:
 
-7. `./configure`
+7. `./configure`  
   `make -j4 all`
 
 Now finally continue with the install
