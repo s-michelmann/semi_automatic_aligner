@@ -8,11 +8,16 @@ Installation
 install anaconda or miniconda
 install XCode
 
-## getting the aligner to work (here: penn phonetics forced aligner. I have been using https://github.com/jaekookang/p2fa_py3
-### Install the htk toolkit from http://htk.eng.cam.ac.uk/
+## getting the aligner to work
+(here: using penn phonetics forced aligner. I have been using https://github.com/jaekookang/p2fa_py3
+### Install the htk toolkit
+from http://htk.eng.cam.ac.uk/
+
 Download the unix/linux version and put it in your Documents folder
 Open a terminal and type
+
 $	tar -xvf HTK-3.4.1.tar.gz
+
 $	cd htk
 
 Then type
@@ -25,21 +30,21 @@ When compiling (make -j4 all) watch out for fatal error: 'malloc.h' file not fou
 
 $ export CPPFLAGS=-I/opt/X11/include
 
-# Add CPPFLAGS
+Add CPPFLAGS
 $ export CPPFLAGS=-I/opt/X11/include
 
-# If the above doesn't work, do
+If the above doesn't work, do
 $ ln -s /opt/X11/include/X11 /usr/local/include/X11
 
-# Replace line 21 (#include <malloc.h>) of HTKLib/strarr.c as below
-#   include <malloc/malloc.h>
+ Replace line 21 (#include <malloc.h>) of HTKLib/strarr.c as below
+  include <malloc/malloc.h>
 
-# Replace line 1650 (labid != splabid) of HTKLib/HRec.c as below
-#   labpr != splabid
-# This step will prevent "ERROR [+8522] LatFromPaths: Align have dur<=0"
-# See: https://speechtechie.wordpress.com/2009/06/12/using-htk-3-4-1-on-mac-os-10-5/
+ Replace line 1650 (labid != splabid) of HTKLib/HRec.c as below
+   labpr != splabid
+ This step will prevent "ERROR [+8522] LatFromPaths: Align have dur<=0"
+ See: https://speechtechie.wordpress.com/2009/06/12/using-htk-3-4-1-on-mac-os-10-5/
 
-# Compile with options if necessary
+ Compile with options if necessary
 $ ./configure
 $ make all
 
