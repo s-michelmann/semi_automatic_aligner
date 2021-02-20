@@ -35,15 +35,15 @@ If the above doesn't work, do
   - Then open the file *HTKLib/strarr.c* and in line 21
 
 
-  | replace 	| with 	|
-  |-	|-	|
-  | include <malloc.h 	| include <malloc/malloc.h 	|
+      | replace 	| with 	|
+      |-	|-	|
+      | include <malloc.h 	| include <malloc/malloc.h 	|
 
   - Then open *HTKLib/HRec.c* go to line 1650 and
 
-  | replace 	| with 	|
-  |-	|-	|
-  | (labid != splabid) 	| labpr != splabid 	|
+      | replace 	| with 	|
+      |-	|-	|
+      | (labid != splabid) 	| labpr != splabid 	|
 
 
 This step will prevent "ERROR [+8522] LatFromPaths: Align have dur<=0"
@@ -58,35 +58,35 @@ Now finally continue with the install
 
 8. `sudo make -j4 install`
 
-- [x] Install sox
-  check that conda is available
-  `conda —-version`
+- [x] Install sox  
+  check that conda is available  
+  `conda —-version`  
 
-  And update if necessary
-  `conda update conda`
+  And update if necessary  
+  `conda update conda`  
 
-Make a new conda environment named alignment that uses python3
- `conda create -n alignment python=3`
+Make a new conda environment named alignment that uses python3  
+ `conda create -n alignment python=3`  
 
-activate the environment
-`conda activate alignment`
+activate the environment  
+`conda activate alignment`  
 
-Install sox using conda
-`conda install -c conda-forge sox`
+Install sox using conda  
+`conda install -c conda-forge sox`  
 
-- [x] get jaekookang's p2fa for python3
+- [x] get jaekookang's p2fa for python3  
 
 change into your designated folder (e.g. Documents/alignment)  
 
 clone p2fa for python3  
-`git clone https://github.com/jaekookang/p2fa_py3.git`
+`git clone https://github.com/jaekookang/p2fa_py3.git`  
 
 Now  
 `cd p2fa_py3/p2fa`  
 and type  
-`python align.py examples/ploppy.wav examples/ploppy.txt examples/everythingWorks.TextGrid`  
+`python align.py examples/ploppy.wav examples/ploppy.txt examples/everythingWorks.TextGrid`   
 
-If everything works well you should now see a file named *everythingWorks.TextGrid* in the examples folder. The file contains the aligned sentence: I am trying to say ploppy  
+If everything works you should now see a file named *everythingWorks.TextGrid* in the examples folder. The file contains the aligned sentence: I am trying to say ploppy  
 
 ### Getting this GUI to work  
 Now you can cd back into your desgnated directory that should have a folder named p2fa_py3 and a folder named htk in it.  
@@ -100,3 +100,10 @@ type
 - [x] type `python semi_align.py`  
 
 this should open the GUI. Once You have opened a .wav File - open wav and a .txt file the GUI will load the whole interface (see also wiki for manual). Note that .wav files may have issues with the aligner if they are not one channel sampled at 16K.
+
+## Use  
+You need to
+- open a .wav file and a .txt file that contains the transcription of the audio. You should then see the audio and the text displayed.
+- Left-click onto the audio-trace and hit the green play button to play.
+- Right-click onto the audio-trace to select a segment (a blue patch will mark the segment)
+- Click the blue play button to play the segment (note that the segment stops automatically with inaccuracies in the range of the refresh rate)
