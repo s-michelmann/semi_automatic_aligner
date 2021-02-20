@@ -99,4 +99,4 @@ change into the folder `cd semi_automatic_aligner`
 type  
 - [x] type `python semi_align.py`  
 
-this should open the GUI. Once You have opened a .wav File - open wav and a .txt file the GUI will load the whole interface (see wiki for manual). Note that .wav files may have issues with the aligner if they are not one channel sampled at 16K.
+this should open the GUI. Once You have opened a .wav File - open wav and a .txt file the GUI will load the whole interface (see also wiki for manual). Note that .wav files may have issues with the aligner if they are not one channel sampled at 16K.
