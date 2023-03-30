@@ -2,6 +2,7 @@
 This is a little GUI that facilitates text-to-speech alignment. The idea is to manually select segments from the audio and align them with parts of the transcript. This helps when long silences or noise are messing up the forced alignment. You can also correct the transcript while you are aligning.
 This version is for **MacOS**, tested under MacOS Big Sur (to use with windows you need workarounds for the penn aligner, e.g. using cygwin and python 2). It uses penn phonetics forced aligner. You can also integrate different aligners by changing the aligner function (this is not ready, you have to finish coding this yourself). Also: this is my own private (and messy) tool, so use with caution. It only gives you word onset and offset times, **not** phoneme level alignment.
 
+<img width="1002" alt="screen_shot" src="https://user-images.githubusercontent.com/42154998/228976643-e3033751-008c-4208-ab8c-4e89b5373c1e.png">
 
 ## Installation  
 
