@@ -2,6 +2,8 @@
 
 This guide explains how to set up and use the Montreal Forced Aligner (MFA) with the semi_automatic_aligner GUI.
 
+MFA typically takes around a minute to process any alignments(despite the length of file), which is longer than some other methods, but it provides one of the most accurate alignment results available. This makes it an excellent choice when precision is important for your project.
+
 ## Installation
 
 ### Prerequisites
@@ -11,6 +13,8 @@ This guide explains how to set up and use the Montreal Forced Aligner (MFA) with
   conda create -n aligner -c conda-forge montreal-forced-aligner
   conda activate aligner
   ```
+
+For more detailed installation instructions, see the [official MFA documentation](https://montreal-forced-aligner.readthedocs.io/en/latest/index.html).
 
 ### Setting up MFA
 
@@ -81,10 +85,41 @@ If the aligner can't find your dictionary or acoustic model:
 
 MFA has specific requirements for audio files:
 - Must be mono (single channel)
-- Should be sampled at 16kHz
+- Should be sampled at 16kHz for best results
 
-If your audio doesn't meet these requirements, you can convert it using tools like Audacity:
+If your audio doesn't meet these requirements, you can convert it using tools like [Audacity](https://www.audacityteam.org/) (a free, open source audio editor):
 1. Open your audio file in Audacity
 2. For stereo files: Tracks > Mix > Mix Stereo Down to Mono
 3. For sample rate: Tracks > Resample > 16000 Hz
-4. Export as WAV: File > Export > Export as WAV
+4. Export as WAV: File > Export > Export as WAV...
+
+## Tips for Preparing Files for MFA
+
+Based on [Eleanor Chodroff's tutorial](https://eleanorchodroff.com/tutorial/montreal-forced-aligner.html#file-preparation), here are some additional tips for preparing your files:
+
+### Audio Files
+- Use WAV format with PCM encoding
+- Ensure consistent sampling rate (16kHz recommended)
+- Convert to mono channel for best results
+- Remove any DC offset
+- Normalize audio levels if there are significant volume differences between recordings
+- Trim excessive silence at the beginning and end of recordings
+- Split long recordings (>10 minutes) into smaller chunks for better alignment
+
+### Text Files
+- Ensure text is encoded in UTF-8
+- Remove special characters that aren't in the dictionary
+- Standardize capitalization (lowercase is recommended)
+- Expand abbreviations and numbers to their spoken form (e.g., "Dr." to "doctor", "123" to "one hundred twenty three")
+- Remove punctuation marks except apostrophes in contractions
+- Correct any spelling errors
+- Make sure all words in your transcript are in the dictionary or add them manually
+
+### Organizing Files
+- Keep audio and corresponding text files in the same directory
+- Use matching filenames (e.g., recording1.wav and recording1.txt)
+- For multi-speaker recordings, consider segmenting by speaker for better results
+
+For more detailed information on file preparation and troubleshooting, refer to:
+- [Official MFA Documentation](https://montreal-forced-aligner.readthedocs.io/en/latest/index.html)
+- [Eleanor Chodroff's MFA Tutorial](https://eleanorchodroff.com/tutorial/montreal-forced-aligner.html)
