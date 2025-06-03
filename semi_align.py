@@ -29,7 +29,8 @@ open_with_files = False;
 
 #import time
 
-from segmentaligner import SegmentAligner
+from mfa_aligner import SegmentAligner
+# from segmentaligner import SegmentAligner
 import pyaudio
 #import struct
 import numpy as np
@@ -478,8 +479,8 @@ def doubleright_step():
         line = ax1.get_lines()
     
     patches = ax1.patches
-    if len(patches)>0:
-          patches.remove(patches[0])
+    if patches:
+        patches[0].remove()
     draw_words()
 
 # radical change: only draw if words_in_view, then update in refresh (add draw_words)
@@ -487,8 +488,12 @@ def draw_words():
     global ax1, ax2 #,words_in_view
     sign = +1
     if ax2.texts:
-       while len(ax2.texts)>0:
-           del(ax2.texts[-1])
+       # Replaced this line:
+       # while len(ax2.texts)>0:
+       #     del(ax2.texts[-1])
+       # With this:
+       for text in ax2.texts[:]:
+           text.remove()
     
     at = sa.audio.tell()
     lim = ax1.get_xlim()    
@@ -552,8 +557,8 @@ def left_step():
         line = ax1.get_lines()
     
     patches = ax1.patches
-    if len(patches)>0:
-          patches.remove(patches[0])
+    if patches:
+        patches[0].remove()
     
     
     draw_words() # will also draw the canvas
@@ -582,7 +587,7 @@ def onclick(event):
         
         #get data
         x = event.xdata
-        if not(x):
+        if not([x]):
             return
         
         selection_A = x
@@ -604,8 +609,8 @@ def onclick(event):
         ax1.axvline(x=x, color = 'crimson', lw = 0.5)
         
         patches = ax1.patches
-        if len(patches)>0:
-              patches.remove(patches[0])
+        if patches:
+            patches[0].remove()
              
         # if (x+x_scale/2)<time_axis[-1] and (x-x_scale/2)>0:
         #     fig.gca().set_xlim((x-x_scale/2), 
@@ -634,12 +639,12 @@ def onclick(event):
     elif event.button==3:
         
         x = event.xdata
-        if not(x):
+        if not([x]):
             return
         
         patches = ax1.patches
-        if len(patches)>0:
-             patches.remove(patches[0])
+        if patches:
+            patches[0].remove()
        # canvas.draw()
         
         
@@ -679,8 +684,8 @@ def onclick(event):
            # refresh()
         else:
             patches = ax1.patches
-            if len(patches)>0:
-                  patches.remove(patches[0])
+            if patches:
+                patches[0].remove()
             # popping the 2nd line
             line = ax1.get_lines()
             
@@ -703,46 +708,37 @@ def pause_audio():
     stream.stop_stream()    
     canvas.flush_events()
 def play_audio():
-    global playing
-    global my_thread
-    global bg
+    global playing, my_thread, bg
     if not constructed or playing:
         return
     
-    
-    
     if segment_playing:
         pause_audio()
-        
-    # at = sa.audio.tell()
-    # x = time_axis[at]
-    # lim_old = ax1.get_xlim()
-    # lim_new = (x-x_scale/2, x+x_scale/2)
-    # if lim_new[0] < time_axis[0]:
-    #     lim_new = (time_axis[0], x_scale)
-    # if lim_new[1] > time_axis[-1]:
-    #     lim_new = (time_axis[-1]-x_scale,time_axis[-1])
-   
-    # if not(lim_old == lim_new):
-    #     ax1.set_xlim(lim_new)
-    #     ax2.set_xlim(lim_new)
- # TODO FIX  draw_words()
-    if len(sa.aligned_words)>0:
-        draw_words()
-    else:
-        canvas.draw() 
-        #canvas.flush_events()    
     
-  #  bg = canvas.copy_from_bbox(ax1.bbox)
+    # Make sure stream is stopped before starting
+    if stream.is_active():
+        stream.stop_stream()
+    
+    # Reset audio position if needed
+    at = sa.audio.tell()
+    
+    # Draw words without causing errors
+    try:
+        if len(sa.aligned_words) > 0:
+            draw_words()
+        else:
+            canvas.draw()
+    except Exception as e:
+        print(f"Warning: Error in draw_words: {e}")
+        canvas.draw()
     
     playing = True
-   
+    
+    # Start audio in a separate thread
     my_thread = threading.Thread(target=start_audio_stream)
-    my_thread.start() 
-    
-    
-   # print('playing audio')
-    
+    my_thread.daemon = True  # Make thread daemon so it exits when main program exits
+    my_thread.start()
+        
 def play_pause(event = None):
     if not constructed:
         return
@@ -796,7 +792,7 @@ def refresh():
     if not(segment_playing):
         if len(line)>2:
             lin = line[2]
-            lin.set_xdata(x)
+            lin.set_xdata([x])
             lin.set_animated(True)
             ax1.draw_artist(lin)
         elif x>selection_A:
@@ -910,8 +906,8 @@ def right_step():
         line = ax1.get_lines()
     
     patches = ax1.patches
-    if len(patches)>0:
-          patches.remove(patches[0])
+    if patches:
+        patches[0].remove()
     
     draw_words() # will draw canvas too
     # i = 0
@@ -944,8 +940,8 @@ def stop_audio():
     stream.stop_stream()
     sa.audio.setpos(int(0))
     patches = ax1.patches
-    if len(patches)>0:
-        patches.remove(patches[0])
+    if patches:
+        patches[0].remove()
     line = ax1.get_lines()
     while len(line)>1:
         line[1].remove()
