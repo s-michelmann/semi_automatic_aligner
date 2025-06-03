@@ -23,7 +23,6 @@ For more detailed installation instructions, see the [official MFA documentation
    mfa model download acoustic english_us_arpa
    mfa model download dictionary english_us_arpa
    ```
-
 2. Configure the dictionary and acoustic model paths:
    
    The aligner looks for a configuration file in the following locations:
@@ -41,7 +40,9 @@ For more detailed installation instructions, see the [official MFA documentation
 
    If you're using the pretrained models from MFA, you can set `use_pretrained_acoustic` to `true` and specify just the model name for `acoustic_model_path`. The aligner will automatically download the model if it's not found.
 
-   If you have your own dictionary file, set the full path in `dictionary_path`. Make sure to expand the `~` to your home directory or use an absolute path.
+   If you have your own dictionary file, set the full path in `dictionary_path`. Make sure to expand the `~` to your home directory or use an absolute path. 
+
+   If you are using other alignment than MFA, you will need to change which file it is called semi_align, in the first few lines of imports. 
 
 ### Troubleshooting dictionary and acoustic model issues
 
